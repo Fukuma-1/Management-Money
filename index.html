@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceTracker Pro - Manajemen Keuangan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            background: linear-gradient(45deg, #16213e 0%, #0f3460 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(64, 224, 208, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #40e0d0;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(64, 224, 208, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #b0b0b0;
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #1e1e2e 0%, #2a2a3e 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #40e0d0, #48cae4, #40e0d0);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(64, 224, 208, 0.2);
+        }
+
+        .card h3 {
+            color: #40e0d0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #b0b0b0;
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #444;
+            border-radius: 8px;
+            background: #2a2a3e;
+            color: #e0e0e0;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #40e0d0;
+            box-shadow: 0 0 10px rgba(64, 224, 208, 0.3);
+        }
+
+        button {
+            background: linear-gradient(45deg, #40e0d0 0%, #48cae4 100%);
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(64, 224, 208, 0.4);
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .summary-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #40e0d0;
+            margin-bottom: 5px;
+        }
+
+        .summary-label {
+            color: #b0b0b0;
+            font-size: 0.9em;
+        }
+
+        .transaction-list {
+            background: linear-gradient(145deg, #1e1e2e 0%, #2a2a3e 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #333;
+            margin-top: 20px;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #2a2a3e;
+            border-radius: 8px;
+            border-left: 4px solid #40e0d0;
+            transition: all 0.3s ease;
+        }
+
+        .transaction-item:hover {
+            background: #353545;
+            transform: translateX(5px);
+        }
+
+        .transaction-desc {
+            flex: 1;
+        }
+
+        .transaction-amount {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .income {
+            color: #4ade80;
+        }
+
+        .expense {
+            color: #f87171;
+        }
+
+        .whatsapp-section {
+            background: linear-gradient(145deg, #1e1e2e 0%, #2a2a3e 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(45deg, #25d366 0%, #128c7e 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .savings-calculator {
+            background: linear-gradient(145deg, #1e1e2e 0%, #2a2a3e 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            border: 1px solid #333;
+        }
+
+        .result {
+            background: #2a2a3e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #40e0d0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 FinanceTracker Pro</h1>
+            <p class="subtitle">Kelola Keuangan Anda dengan Mudah & Efisien</p>
+        </header>
+
+        <div class="summary">
+            <div class="summary-card">
+                <div class="summary-value" id="totalIncome">Rp 0</div>
+                <div class="summary-label">Total Pemasukan</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value" id="totalExpense">Rp 0</div>
+                <div class="summary-label">Total Pengeluaran</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value" id="balance">Rp 0</div>
+                <div class="summary-label">Saldo</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value" id="dailyLimit">Rp 0</div>
+                <div class="summary-label">Limit Harian</div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <h3>📈 Tambah Pemasukan</h3>
+                <div class="form-group">
+                    <label>Deskripsi:</label>
+                    <input type="text" id="incomeDesc" placeholder="Gaji, bonus, dll">
+                </div>
+                <div class="form-group">
+                    <label>Jumlah:</label>
+                    <input type="number" id="incomeAmount" placeholder="Jumlah dalam Rupiah">
+                </div>
+                <div class="form-group">
+                    <label>Tanggal:</label>
+                    <input type="date" id="incomeDate">
+                </div>
+                <button onclick="addIncome()">Tambah Pemasukan</button>
+            </div>
+
+            <div class="card">
+                <h3>📉 Tambah Pengeluaran</h3>
+                <div class="form-group">
+                    <label>Kategori:</label>
+                    <select id="expenseCategory">
+                        <option value="makanan">🍔 Makanan</option>
+                        <option value="transportasi">🚗 Transportasi</option>
+                        <option value="belanja">🛍 Belanja</option>
+                        <option value="hiburan">🎮 Hiburan</option>
+                        <option value="kesehatan">🏥 Kesehatan</option>
+                        <option value="pendidikan">📚 Pendidikan</option>
+                        <option value="lainnya">📝 Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi:</label>
+                    <input type="text" id="expenseDesc" placeholder="Deskripsi pengeluaran">
+                </div>
+                <div class="form-group">
+                    <label>Jumlah:</label>
+                    <input type="number" id="expenseAmount" placeholder="Jumlah dalam Rupiah">
+                </div>
+                <div class="form-group">
+                    <label>Tanggal:</label>
+                    <input type="date" id="expenseDate">
+                </div>
+                <button onclick="addExpense()">Tambah Pengeluaran</button>
+            </div>
+
+            <div class="card">
+                <h3>🎯 Kalkulator Tabungan</h3>
+                <div class="form-group">
+                    <label>Target Tabungan:</label>
+                    <input type="number" id="savingsTarget" placeholder="Target dalam Rupiah">
+                </div>
+                <div class="form-group">
+                    <label>Jangka Waktu (hari):</label>
+                    <input type="number" id="savingsDays" placeholder="Berapa hari">
+                </div>
+                <div class="form-group">
+                    <label>Pemasukan Bulanan:</label>
+                    <input type="number" id="monthlyIncome" placeholder="Pemasukan per bulan">
+                </div>
+                <button onclick="calculateSavings()">Hitung Tabungan</button>
+                <div id="savingsResult" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="transaction-list">
+            <h3>📋 Riwayat Transaksi</h3>
+            <div id="transactionHistory">
+                <p style="text-align: center; color: #666; padding: 20px;">Belum ada transaksi</p>
+            </div>
+        </div>
+
+        <div class="whatsapp-section">
+            <h3>📱 Akses via WhatsApp</h3>
+            <p>Kelola keuangan Anda langsung dari WhatsApp!</p>
+            <a href="https://wa.me/6281234567890?text=Halo%20FinanceTracker%20Pro!%20Saya%20ingin%20menggunakan%20layanan%20manajemen%20keuangan%20via%20WhatsApp" class="whatsapp-btn" target="_blank">
+                💬 Chat via WhatsApp
+            </a>
+            <div style="margin-top: 20px; padding: 15px; background: #2a2a3e; border-radius: 8px;">
+                <h4>Perintah WhatsApp:</h4>
+                <p>• "Tambah pemasukan [jumlah] [deskripsi]"</p>
+                <p>• "Tambah pengeluaran [jumlah] [kategori] [deskripsi]"</p>
+                <p>• "Cek saldo"</p>
+                <p>• "Laporan bulanan"</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+        let settings = JSON.parse(localStorage.getItem('settings')) || {};
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setTodayDate();
+            updateSummary();
+            displayTransactions();
+        });
+
+        function setTodayDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('incomeDate').value = today;
+            document.getElementById('expenseDate').value = today;
+        }
+
+        function addIncome() {
+            const desc = document.getElementById('incomeDesc').value;
+            const amount = parseFloat(document.getElementById('incomeAmount').value);
+            const date = document.getElementById('incomeDate').value;
+
+            if (!desc || !amount || !date) {
+                alert('Mohon lengkapi semua field!');
+                return;
+            }
+
+            const transaction = {
+                id: Date.now(),
+                type: 'income',
+                category: 'pemasukan',
+                description: desc,
+                amount: amount,
+                date: date,
+                timestamp: new Date().toISOString()
+            };
+
+            transactions.push(transaction);
+            saveData();
+            updateSummary();
+            displayTransactions();
+            clearIncomeForm();
+
+            showNotification('Pemasukan berhasil ditambahkan!', 'success');
+        }
+
+        function addExpense() {
+            const category = document.getElementById('expenseCategory').value;
+            const desc = document.getElementById('expenseDesc').value;
+            const amount = parseFloat(document.getElementById('expenseAmount').value);
+            const date = document.getElementById('expenseDate').value;
+
+            if (!desc || !amount || !date) {
+                alert('Mohon lengkapi semua field!');
+                return;
+            }
+
+            const transaction = {
+                id: Date.now(),
+                type: 'expense',
+                category: category,
+                description: desc,
+                amount: amount,
+                date: date,
+                timestamp: new Date().toISOString()
+            };
+
+            transactions.push(transaction);
+            saveData();
+            updateSummary();
+            displayTransactions();
+            clearExpenseForm();
+
+            showNotification('Pengeluaran berhasil ditambahkan!', 'success');
+        }
+
+        function calculateSavings() {
+            const target = parseFloat(document.getElementById('savingsTarget').value);
+            const days = parseInt(document.getElementById('savingsDays').value);
+            const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value);
+
+            if (!target || !days || !monthlyIncome) {
+                alert('Mohon lengkapi semua field!');
+                return;
+            }
+
+            const dailySavings = target / days;
+            const dailyIncome = monthlyIncome / 30;
+            const maxDailyExpense = dailyIncome - dailySavings;
+
+            const resultDiv = document.getElementById('savingsResult');
+            resultDiv.innerHTML = `
+                <h4>💡 Hasil Perhitungan:</h4>
+                <p><strong>Target Tabungan:</strong> ${formatCurrency(target)}</p>
+                <p><strong>Durasi:</strong> ${days} hari</p>
+                <p><strong>Nabung per hari:</strong> ${formatCurrency(dailySavings)}</p>
+                <p><strong>Pemasukan harian:</strong> ${formatCurrency(dailyIncome)}</p>
+                <p><strong>Batas pengeluaran harian:</strong> ${formatCurrency(maxDailyExpense)}</p>
+                ${maxDailyExpense < 0 ? '<p style="color: #f87171;"><strong>⚠ Peringatan:</strong> Target terlalu tinggi untuk pemasukan Anda!</p>' : ''}
+            `;
+            resultDiv.style.display = 'block';
+
+            // Update daily limit
+            document.getElementById('dailyLimit').textContent = formatCurrency(maxDailyExpense);
+        }
+
+        function updateSummary() {
+            const totalIncome = transactions
+                .filter(t => t.type === 'income')
+                .reduce((sum, t) => sum + t.amount, 0);
+
+            const totalExpense = transactions
+                .filter(t => t.type === 'expense')
+                .reduce((sum, t) => sum + t.amount, 0);
+
+            const balance = totalIncome - totalExpense;
+
+            document.getElementById('totalIncome').textContent = formatCurrency(totalIncome);
+            document.getElementById('totalExpense').textContent = formatCurrency(totalExpense);
+            document.getElementById('balance').textContent = formatCurrency(balance);
+        }
+
+        function displayTransactions() {
+            const historyDiv = document.getElementById('transactionHistory');
+
+            if (transactions.length === 0) {
+                historyDiv.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">Belum ada transaksi</p>';
+                return;
+            }
+
+            const sortedTransactions = transactions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            historyDiv.innerHTML = sortedTransactions.map(transaction => `
+                <div class="transaction-item">
+                    <div class="transaction-desc">
+                        <strong>${transaction.description}</strong><br>
+                        <small>${transaction.category} • ${formatDate(transaction.date)}</small>
+                    </div>
+                    <div class="transaction-amount ${transaction.type}">
+                        ${transaction.type === 'income' ? '+' : '-'}${formatCurrency(transaction.amount)}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('id-ID', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function clearIncomeForm() {
+            document.getElementById('incomeDesc').value = '';
+            document.getElementById('incomeAmount').value = '';
+            setTodayDate();
+        }
+
+        function clearExpenseForm() {
+            document.getElementById('expenseDesc').value = '';
+            document.getElementById('expenseAmount').value = '';
+            setTodayDate();
+        }
+
+        function saveData() {
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            localStorage.setItem('settings', JSON.stringify(settings));
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4ade80' : '#f87171'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Add CSS for notification animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
