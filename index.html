@@ -152,6 +152,16 @@
             box-shadow: 0 5px 15px rgba(64, 224, 208, 0.4);
         }
 
+        .delete-btn {
+            background: linear-gradient(45deg, #f87171 0%, #ef4444 100%);
+            color: white;
+            margin-top: 20px;
+        }
+
+        .delete-btn:hover {
+            box-shadow: 0 5px 15px rgba(248, 113, 113, 0.4);
+        }
+
         .summary {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -221,47 +231,6 @@
             color: #f87171;
         }
 
-        .whatsapp-section {
-            background: linear-gradient(145deg, #1e1e2e 0%, #2a2a3e 100%);
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 30px;
-            border: 1px solid #333;
-        }
-
-        .whatsapp-btn {
-            background: linear-gradient(45deg, #25d366 0%, #128c7e 100%);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .whatsapp-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-        }
-
-        .savings-calculator {
-            background: linear-gradient(145deg, #1e1e2e 0%, #2a2a3e 100%);
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 20px;
-            border: 1px solid #333;
-        }
-
-        .result {
-            background: #2a2a3e;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            border-left: 4px solid #40e0d0;
-        }
-
         .research-section {
             background: linear-gradient(145deg, #1e1e2e 0%, #2a2a3e 100%);
             border-radius: 15px;
@@ -286,88 +255,67 @@
         }
 
         .research-card:hover {
+            background: #353545;
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(64, 224, 208, 0.15);
         }
 
-        .chart-container {
+        .result {
             background: #2a2a3e;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 15px;
+            border-radius: 8px;
             margin-top: 15px;
-            height: 300px;
-            position: relative;
-        }
-
-        .tab-container {
-            display: flex;
-            border-bottom: 2px solid #333;
-            margin-bottom: 20px;
-        }
-
-        .tab {
-            background: none;
-            border: none;
-            padding: 10px 20px;
-            color: #b0b0b0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: auto;
-            margin: 0 5px;
-        }
-
-        .tab.active {
-            color: #40e0d0;
-            border-bottom: 2px solid #40e0d0;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .insight-card {
-            background: linear-gradient(135deg, #2a2a3e 0%, #353545 100%);
-            padding: 20px;
-            border-radius: 12px;
-            margin: 15px 0;
             border-left: 4px solid #40e0d0;
         }
 
-        .modal {
-            display: none;
+        .notification {
             position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
             z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
         }
 
-        .modal-content {
-            background: linear-gradient(145deg, #1e1e2e 0%, #2a2a3e 100%);
-            margin: 5% auto;
-            padding: 30px;
-            border-radius: 15px;
-            width: 80%;
-            max-width: 500px;
-            border: 1px solid #333;
+        .notification.show {
+            transform: translateX(0);
         }
 
-        .close {
-            color: #b0b0b0;
-            float: right;
-            font-size: 28px;
+        .notification.success {
+            background: linear-gradient(45deg, #4ade80 0%, #16a34a 100%);
+        }
+
+        .notification.error {
+            background: linear-gradient(45deg, #f87171 0%, #ef4444 100%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: #353545;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
             font-weight: bold;
-            cursor: pointer;
+            color: #40e0d0;
+            margin-bottom: 5px;
         }
 
-        .close:hover {
-            color: #40e0d0;
+        .stat-label {
+            color: #b0b0b0;
+            font-size: 0.9em;
         }
 
         @media (max-width: 768px) {
@@ -386,11 +334,6 @@
             .research-grid {
                 grid-template-columns: 1fr;
             }
-
-            .modal-content {
-                width: 95%;
-                margin: 10% auto;
-            }
         }
     </style>
 </head>
@@ -398,7 +341,7 @@
     <div class="container">
         <header>
             <h1>Management Of Money</h1>
-            <p class="subtitle">Kelola Keuangan Kita dengan Mudah & Efisien</p>
+            <p class="subtitle">Kelola Keuangan dengan Mudah & Efisien</p>
         </header>
 
         <div class="summary">
@@ -415,14 +358,14 @@
                 <div class="summary-label">Saldo</div>
             </div>
             <div class="summary-card">
-                <div class="summary-value" id="dailyLimit">Rp 0</div>
-                <div class="summary-label">Limit Harian</div>
+                <div class="summary-value" id="totalTransactions">0</div>
+                <div class="summary-label">Total Transaksi</div>
             </div>
         </div>
 
         <div class="dashboard">
             <div class="card">
-                <h3> Tambah Pemasukan</h3>
+                <h3>Tambah Pemasukan</h3>
                 <div class="form-group">
                     <label>Deskripsi:</label>
                     <input type="text" id="incomeDesc" placeholder="Gaji, bonus, dll">
@@ -439,17 +382,17 @@
             </div>
 
             <div class="card">
-                <h3> Tambah Pengeluaran</h3>
+                <h3>Tambah Pengeluaran</h3>
                 <div class="form-group">
                     <label>Kategori:</label>
                     <select id="expenseCategory">
-                        <option value="makanan">🍽️ Makanan</option>
-                        <option value="transportasi">🚗 Transportasi</option>
-                        <option value="belanja">🛍️ Belanja</option>
-                        <option value="hiburan">🎬 Hiburan</option>
-                        <option value="kesehatan">🏥 Kesehatan</option>
-                        <option value="pendidikan">📚 Pendidikan</option>
-                        <option value="lainnya">📦 Lainnya</option>
+                        <option value="makanan">Makanan</option>
+                        <option value="transportasi">Transportasi</option>
+                        <option value="belanja">Belanja</option>
+                        <option value="hiburan">Hiburan</option>
+                        <option value="kesehatan">Kesehatan</option>
+                        <option value="pendidikan">Pendidikan</option>
+                        <option value="lainnya">Lainnya</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -468,7 +411,7 @@
             </div>
 
             <div class="card">
-                <h3> Kalkulator Tabungan</h3>
+                <h3>Kalkulator Tabungan</h3>
                 <div class="form-group">
                     <label>Target Tabungan:</label>
                     <input type="number" id="savingsTarget" placeholder="Target dalam Rupiah">
@@ -486,126 +429,93 @@
             </div>
         </div>
 
-        <!-- Riset Keuangan Section -->
         <div class="research-section">
-            <h3> Riset & Analisis Keuangan</h3>
-            <div class="tab-container">
-                <button class="tab active" onclick="showTab('overview')">Ringkasan</button>
-                <button class="tab" onclick="showTab('analysis')">Analisis</button>
-                <button class="tab" onclick="showTab('trends')">Tren</button>
-                <button class="tab" onclick="showTab('recommendations')">Rekomendasi</button>
-            </div>
-
-            <div id="overview" class="tab-content active">
-                <div class="research-grid">
-                    <div class="research-card">
-                        <h4> Pola Pengeluaran</h4>
-                        <div id="expensePattern">Memuat data...</div>
-                    </div>
-                    <div class="research-card">
-                        <h4> Kategori Tertinggi</h4>
-                        <div id="topCategory">Memuat data...</div>
-                    </div>
-                    <div class="research-card">
-                        <h4> Rata-rata Harian</h4>
-                        <div id="dailyAverage">Memuat data...</div>
-                    </div>
-                    <div class="research-card">
-                        <h4> Progress Target</h4>
-                        <div id="targetProgress">Memuat data...</div>
-                    </div>
+            <h3>Riset & Analisis Keuangan</h3>
+            <div class="research-grid">
+                <div class="research-card">
+                    <h4>Kategori Pengeluaran Tertinggi</h4>
+                    <div id="topCategory">Memuat data...</div>
+                </div>
+                <div class="research-card">
+                    <h4>Rata-rata Pengeluaran Harian</h4>
+                    <div id="dailyAverage">Memuat data...</div>
+                </div>
+                <div class="research-card">
+                    <h4>Tingkat Tabungan</h4>
+                    <div id="savingsRate">Memuat data...</div>
+                </div>
+                <div class="research-card">
+                    <h4>Status Keuangan</h4>
+                    <div id="financialStatus">Memuat data...</div>
                 </div>
             </div>
 
-            <div id="analysis" class="tab-content">
-                <div class="insight-card">
-                    <h4> Analisis Keuangan Mendalam</h4>
-                    <div id="deepAnalysis">Memuat analisis...</div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="avgTransaction">Rp 0</div>
+                    <div class="stat-label">Rata-rata per Transaksi</div>
                 </div>
-                <div class="chart-container">
-                    <h4> Grafik Perbandingan Pemasukan vs Pengeluaran</h4>
-                    <canvas id="comparisonChart"></canvas>
+                <div class="stat-item">
+                    <div class="stat-value" id="highestExpense">Rp 0</div>
+                    <div class="stat-label">Pengeluaran Tertinggi</div>
                 </div>
-            </div>
-
-            <div id="trends" class="tab-content">
-                <div class="insight-card">
-                    <h4> Tren Pengeluaran 30 Hari Terakhir</h4>
-                    <div id="monthlyTrend">Memuat tren...</div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalCategories">0</div>
+                    <div class="stat-label">Total Kategori Digunakan</div>
                 </div>
-                <div class="chart-container">
-                    <h4> Grafik Tren Bulanan</h4>
-                    <canvas id="trendChart"></canvas>
+                <div class="stat-item">
+                    <div class="stat-value" id="daysTracked">0</div>
+                    <div class="stat-label">Hari Dicatat</div>
                 </div>
             </div>
 
-            <div id="recommendations" class="tab-content">
-                <div class="insight-card">
-                    <h4> Rekomendasi Personal</h4>
-                    <div id="personalRecommendations">Memuat rekomendasi...</div>
-                </div>
-                <div class="insight-card">
-                    <h4> Tips Hemat</h4>
-                    <div id="savingTips">Memuat tips...</div>
-                </div>
-            </div>
+            <button class="delete-btn" onclick="confirmDeleteAll()">Hapus Semua Data</button>
         </div>
 
         <div class="transaction-list">
-            <h3> Riwayat Transaksi</h3>
+            <h3>Riwayat Transaksi</h3>
             <div id="transactionHistory">
                 <p style="text-align: center; color: #666; padding: 20px;">Belum ada transaksi</p>
             </div>
         </div>
-
-        <!-- Personal WhatsApp Section -->
-        <div class="whatsapp-section">
-            <h3> Kirim Laporan ke WhatsApp Pribadi</h3>
-            <div class="form-group">
-                <label>Nomor WhatsApp Anda:</label>
-                <input type="tel" id="userWhatsapp" placeholder="Contoh: 081234567890" value="">
-            </div>
-            <button onclick="openWhatsappModal()">Atur Nomor WhatsApp</button>
-            <button onclick="sendReport()" style="background: linear-gradient(45deg, #25d366 0%, #128c7e 100%); color: white; margin-top: 10px;">
-                  Kirim Laporan ke WhatsApp Saya
-            </button>
-            <div style="margin-top: 20px; padding: 15px; background: #2a2a3e; border-radius: 8px;">
-                <h4> Fitur Laporan WhatsApp:</h4>
-                <p>• Ringkasan keuangan harian/bulanan</p>
-                <p>• Analisis pengeluaran per kategori</p>
-                <p>• Rekomendasi hemat berdasarkan pola spending</p>
-                <p>• Reminder target tabungan</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal untuk mengatur nomor WhatsApp -->
-    <div id="whatsappModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeWhatsappModal()">&times;</span>
-            <h3> Atur Nomor WhatsApp</h3>
-            <div class="form-group">
-                <label>Nomor WhatsApp (dengan kode negara):</label>
-                <input type="tel" id="modalWhatsapp" placeholder="Contoh: 6281234567890">
-                <small style="color: #b0b0b0;">Format: 62 untuk Indonesia, tanpa tanda + atau 0 di depan</small>
-            </div>
-            <button onclick="saveWhatsappNumber()">Simpan Nomor</button>
-        </div>
     </div>
 
     <script>
-        // Data storage
-        let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
-        let settings = JSON.parse(localStorage.getItem('settings')) || {
-            whatsappNumber: ''
-        };
+        // Data storage menggunakan memory (bukan localStorage)
+        let transactions = [];
+        let isDataLoaded = false;
+
+        // Load data from localStorage on first run
+        function loadDataFromStorage() {
+            if (!isDataLoaded) {
+                try {
+                    const stored = localStorage.getItem('moneyManagerTransactions');
+                    if (stored) {
+                        transactions = JSON.parse(stored);
+                    }
+                    isDataLoaded = true;
+                } catch (error) {
+                    console.log('Error loading data:', error);
+                    transactions = [];
+                }
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            try {
+                localStorage.setItem('moneyManagerTransactions', JSON.stringify(transactions));
+            } catch (error) {
+                console.log('Error saving data:', error);
+            }
+        }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            loadDataFromStorage();
             setTodayDate();
             updateSummary();
             displayTransactions();
-            loadUserSettings();
             generateResearchData();
         });
 
@@ -615,19 +525,13 @@
             document.getElementById('expenseDate').value = today;
         }
 
-        function loadUserSettings() {
-            if (settings.whatsappNumber) {
-                document.getElementById('userWhatsapp').value = settings.whatsappNumber;
-            }
-        }
-
         function addIncome() {
-            const desc = document.getElementById('incomeDesc').value;
+            const desc = document.getElementById('incomeDesc').value.trim();
             const amount = parseFloat(document.getElementById('incomeAmount').value);
             const date = document.getElementById('incomeDate').value;
 
-            if (!desc || !amount || !date) {
-                alert('Mohon lengkapi semua field!');
+            if (!desc || !amount || !date || amount <= 0) {
+                showNotification('Mohon lengkapi semua field dengan benar!', 'error');
                 return;
             }
 
@@ -653,12 +557,12 @@
 
         function addExpense() {
             const category = document.getElementById('expenseCategory').value;
-            const desc = document.getElementById('expenseDesc').value;
+            const desc = document.getElementById('expenseDesc').value.trim();
             const amount = parseFloat(document.getElementById('expenseAmount').value);
             const date = document.getElementById('expenseDate').value;
 
-            if (!desc || !amount || !date) {
-                alert('Mohon lengkapi semua field!');
+            if (!desc || !amount || !date || amount <= 0) {
+                showNotification('Mohon lengkapi semua field dengan benar!', 'error');
                 return;
             }
 
@@ -687,8 +591,8 @@
             const days = parseInt(document.getElementById('savingsDays').value);
             const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value);
 
-            if (!target || !days || !monthlyIncome) {
-                alert('Mohon lengkapi semua field!');
+            if (!target || !days || !monthlyIncome || target <= 0 || days <= 0 || monthlyIncome <= 0) {
+                showNotification('Mohon lengkapi semua field dengan benar!', 'error');
                 return;
             }
 
@@ -698,18 +602,15 @@
 
             const resultDiv = document.getElementById('savingsResult');
             resultDiv.innerHTML = `
-                <h4> Hasil Perhitungan:</h4>
+                <h4>Hasil Perhitungan:</h4>
                 <p><strong>Target Tabungan:</strong> ${formatCurrency(target)}</p>
                 <p><strong>Durasi:</strong> ${days} hari</p>
                 <p><strong>Nabung per hari:</strong> ${formatCurrency(dailySavings)}</p>
                 <p><strong>Pemasukan harian:</strong> ${formatCurrency(dailyIncome)}</p>
                 <p><strong>Batas pengeluaran harian:</strong> ${formatCurrency(maxDailyExpense)}</p>
-                ${maxDailyExpense < 0 ? '<p style="color: #f87171;"><strong> Peringatan:</strong> Target terlalu tinggi untuk pemasukan Anda!</p>' : ''}
+                ${maxDailyExpense < 0 ? '<p style="color: #f87171;"><strong>Peringatan:</strong> Target terlalu tinggi untuk pemasukan Anda!</p>' : ''}
             `;
             resultDiv.style.display = 'block';
-
-            // Update daily limit
-            document.getElementById('dailyLimit').textContent = formatCurrency(Math.max(0, maxDailyExpense));
         }
 
         function updateSummary() {
@@ -726,6 +627,7 @@
             document.getElementById('totalIncome').textContent = formatCurrency(totalIncome);
             document.getElementById('totalExpense').textContent = formatCurrency(totalExpense);
             document.getElementById('balance').textContent = formatCurrency(balance);
+            document.getElementById('totalTransactions').textContent = transactions.length;
         }
 
         function displayTransactions() {
@@ -742,7 +644,7 @@
                 <div class="transaction-item">
                     <div class="transaction-desc">
                         <strong>${transaction.description}</strong><br>
-                        <small>${getCategoryIcon(transaction.category)} ${transaction.category} • ${formatDate(transaction.date)}</small>
+                        <small>${transaction.category} • ${formatDate(transaction.date)}</small>
                     </div>
                     <div class="transaction-amount ${transaction.type}">
                         ${transaction.type === 'income' ? '+' : '-'}${formatCurrency(transaction.amount)}
@@ -751,76 +653,10 @@
             `).join('');
         }
 
-        function getCategoryIcon(category) {
-            const icons = {
-                'makanan': '🍽️',
-                'transportasi': '🚗',
-                'belanja': '🛍️',
-                'hiburan': '🎬',
-                'kesehatan': '🏥',
-                'pendidikan': '📚',
-                'pemasukan': '💰',
-                'lainnya': '📦'
-            };
-            return icons[category] || '📦';
-        }
-
         function generateResearchData() {
-            // Expense Pattern Analysis
             const expenses = transactions.filter(t => t.type === 'expense');
-            const categoryTotals = {};
-
-            expenses.forEach(expense => {
-                categoryTotals[expense.category] = (categoryTotals[expense.category] || 0) + expense.amount;
-            });
-
-            const topCategory = Object.keys(categoryTotals).reduce((a, b) =>
-                categoryTotals[a] > categoryTotals[b] ? a : b, 'Belum ada data');
-
-            // Daily Average
-            const thirtyDaysAgo = new Date();
-            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-            const recentExpenses = expenses.filter(e => new Date(e.date) >= thirtyDaysAgo);
-            const dailyAverage = recentExpenses.length > 0 ?
-                recentExpenses.reduce((sum, e) => sum + e.amount, 0) / 30 : 0;
-
-            // Update research displays
-            document.getElementById('expensePattern').innerHTML = `
-                <p><strong>${expenses.length}</strong> transaksi bulan ini</p>
-                <p>Rata-rata per transaksi: <strong>${formatCurrency(expenses.reduce((sum, e) => sum + e.amount, 0) / expenses.length || 0)}</strong></p>
-            `;
-
-            document.getElementById('topCategory').innerHTML = `
-                <p>${getCategoryIcon(topCategory)} <strong>${topCategory}</strong></p>
-                <p>${formatCurrency(categoryTotals[topCategory] || 0)}</p>
-            `;
-
-            document.getElementById('dailyAverage').innerHTML = `
-                <p><strong>${formatCurrency(dailyAverage)}</strong> per hari</p>
-                <p>Dalam 30 hari terakhir</p>
-            `;
-
-            // Target Progress
+            const totalExpense = expenses.reduce((sum, e) => sum + e.amount, 0);
             const totalIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
-            const totalExpense = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
-            const savingsRate = totalIncome > 0 ? ((totalIncome - totalExpense) / totalIncome * 100) : 0;
-
-            document.getElementById('targetProgress').innerHTML = `
-                <p><strong>${savingsRate.toFixed(1)}%</strong> tingkat tabungan</p>
-                <p>${savingsRate >= 20 ? ' Excellent!' : savingsRate >= 10 ? ' Good!' : ' Perlu ditingkatkan'}</p>
-            `;
-
-            // Generate deeper analysis
-            generateDeepAnalysis();
-            generateRecommendations();
-            generateTrendAnalysis();
-        }
-
-        function generateDeepAnalysis() {
-            const totalIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
-            const totalExpense = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
-            const expenses = transactions.filter(t => t.type === 'expense');
 
             // Category analysis
             const categoryTotals = {};
@@ -828,310 +664,141 @@
                 categoryTotals[expense.category] = (categoryTotals[expense.category] || 0) + expense.amount;
             });
 
-            const categoryAnalysis = Object.entries(categoryTotals)
-                .sort(([,a], [,b]) => b - a)
-                .map(([category, amount]) => {
-                    const percentage = totalExpense > 0 ? (amount / totalExpense * 100).toFixed(1) : 0;
-                    return `<p>${getCategoryIcon(category)} <strong>${category}:</strong> ${formatCurrency(amount)} (${percentage}%)</p>`;
-                }).join('');
+            const topCategory = Object.keys(categoryTotals).reduce((a, b) =>
+                categoryTotals[a] > categoryTotals[b] ? a : b, 'Belum ada data');
 
-            // Financial health indicators
-            const savingsRate = totalIncome > 0 ? (totalIncome - totalExpense) / totalIncome * 100 : 0;
-            let healthStatus = '';
-            let healthColor = '';
+            // Daily average
+            const daysTracked = [...new Set(transactions.map(t => t.date))].length;
+            const dailyAverage = daysTracked > 0 ? totalExpense / daysTracked : 0;
+
+            // Savings rate
+            const savingsRate = totalIncome > 0 ? ((totalIncome - totalExpense) / totalIncome * 100) : 0;
+
+            // Financial status
+            let status = 'Memuat...';
+            let statusColor = '#40e0d0';
 
             if (savingsRate >= 20) {
-                healthStatus = 'Sangat Sehat - Anda menghemat lebih dari 20% pendapatan!';
-                healthColor = '#4ade80';
+                status = 'Sangat Sehat';
+                statusColor = '#4ade80';
             } else if (savingsRate >= 10) {
-                healthStatus = 'Sehat - Tingkat tabungan yang baik.';
-                healthColor = '#40e0d0';
+                status = 'Sehat';
+                statusColor = '#40e0d0';
             } else if (savingsRate >= 0) {
-                healthStatus = 'Perlu Perbaikan - Cobalah untuk menabung lebih banyak.';
-                healthColor = '#f59e0b';
+                status = 'Perlu Perbaikan';
+                statusColor = '#f59e0b';
             } else {
-                healthStatus = 'Perhatian - Pengeluaran melebihi pemasukan!';
-                healthColor = '#f87171';
+                status = 'Perhatian';
+                statusColor = '#f87171';
             }
 
-            document.getElementById('deepAnalysis').innerHTML = `
-                <div style="margin-bottom: 20px; padding: 15px; background: #353545; border-radius: 8px; border-left: 4px solid ${healthColor};">
-                    <h5> Status Kesehatan Keuangan</h5>
-                    <p><strong>${healthStatus}</strong></p>
-                    <p>Tingkat Tabungan: <strong>${savingsRate.toFixed(1)}%</strong></p>
-                </div>
-
-                <div style="margin-bottom: 20px;">
-                    <h5> Breakdown Pengeluaran per Kategori:</h5>
-                    ${categoryAnalysis || '<p>Belum ada data pengeluaran</p>'}
-                </div>
-
-                <div style="margin-bottom: 20px; padding: 15px; background: #353545; border-radius: 8px;">
-                    <h5> Statistik Keuangan:</h5>
-                    <p><strong>Total Transaksi:</strong> ${transactions.length}</p>
-                    <p><strong>Rata-rata Pengeluaran:</strong> ${formatCurrency(totalExpense / Math.max(expenses.length, 1))}</p>
-                    <p><strong>Pengeluaran Terbesar:</strong> ${expenses.length > 0 ? formatCurrency(Math.max(...expenses.map(e => e.amount))) : 'Rp 0'}</p>
+            // Update displays
+            document.getElementById('topCategory').innerHTML = `
+                <div style="color: ${statusColor};">
+                    <p><strong>${topCategory}</strong></p>
+                    <p>${formatCurrency(categoryTotals[topCategory] || 0)}</p>
                 </div>
             `;
-        }
 
-        function generateRecommendations() {
-            const expenses = transactions.filter(t => t.type === 'expense');
-            const totalExpense = expenses.reduce((sum, e) => sum + e.amount, 0);
-            const totalIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+            document.getElementById('dailyAverage').innerHTML = `
+                <p><strong>${formatCurrency(dailyAverage)}</strong></p>
+                <p>per hari</p>
+            `;
 
-            // Category totals for recommendations
-            const categoryTotals = {};
-            expenses.forEach(expense => {
-                categoryTotals[expense.category] = (categoryTotals[expense.category] || 0) + expense.amount;
-            });
+            document.getElementById('savingsRate').innerHTML = `
+                <p><strong>${savingsRate.toFixed(1)}%</strong></p>
+                <p>dari pemasukan</p>
+            `;
 
-            let recommendations = [];
-
-            // Generate personalized recommendations
-            if (totalIncome > 0) {
-                const savingsRate = (totalIncome - totalExpense) / totalIncome * 100;
-
-                if (savingsRate < 10) {
-                    recommendations.push('🎯 <strong>Target Utama:</strong> Tingkatkan tingkat tabungan ke minimal 10% dari pemasukan.');
-                }
-
-                if (categoryTotals['makanan'] && categoryTotals['makanan'] / totalExpense > 0.4) {
-                    recommendations.push('🍽️ <strong>Makanan:</strong> Pengeluaran makanan tinggi. Coba masak di rumah lebih sering.');
-                }
-
-                if (categoryTotals['hiburan'] && categoryTotals['hiburan'] / totalExpense > 0.2) {
-                    recommendations.push('🎬 <strong>Hiburan:</strong> Alokasi hiburan bisa dikurangi untuk meningkatkan tabungan.');
-                }
-
-                if (categoryTotals['transportasi'] && categoryTotals['transportasi'] / totalExpense > 0.3) {
-                    recommendations.push('🚗 <strong>Transportasi:</strong> Pertimbangkan opsi transportasi yang lebih ekonomis.');
-                }
-            }
-
-            // Default recommendations if no specific issues
-            if (recommendations.length === 0) {
-                recommendations = [
-                    '💡 <strong>Budgeting:</strong> Buat anggaran bulanan untuk setiap kategori pengeluaran.',
-                    '📱 <strong>Tracking:</strong> Catat semua pengeluaran harian untuk kontrol yang lebih baik.',
-                    '🎯 <strong>Emergency Fund:</strong> Siapkan dana darurat setara 3-6 bulan pengeluaran.'
-                ];
-            }
-
-            document.getElementById('personalRecommendations').innerHTML = recommendations.map(rec => `<p>${rec}</p>`).join('');
-
-            // Saving tips
-            const savingTips = [
-                '💰 <strong>Rule 50/30/20:</strong> 50% kebutuhan, 30% keinginan, 20% tabungan.',
-                '🛒 <strong>Belanja Cerdas:</strong> Buat daftar belanja dan patuhi anggaran.',
-                '☕ <strong>Small Expenses:</strong> Kurangi pembelian kecil yang sering (kopi, snack).',
-                '💡 <strong>Bills Review:</strong> Review tagihan bulanan, batalkan langganan yang tidak perlu.',
-                '🎯 <strong>Automated Saving:</strong> Set auto-transfer ke rekening tabungan.',
-                '📱 <strong>Price Comparison:</strong> Bandingkan harga sebelum membeli barang mahal.'
-            ];
-
-            const randomTips = savingTips.sort(() => 0.5 - Math.random()).slice(0, 3);
-            document.getElementById('savingTips').innerHTML = randomTips.map(tip => `<p>${tip}</p>`).join('');
-        }
-
-        function generateTrendAnalysis() {
-            const thirtyDaysAgo = new Date();
-            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-            const recentTransactions = transactions.filter(t => new Date(t.date) >= thirtyDaysAgo);
-            const recentExpenses = recentTransactions.filter(t => t.type === 'expense');
-            const recentIncome = recentTransactions.filter(t => t.type === 'income');
-
-            // Weekly trend
-            const weeklyData = {};
-            recentExpenses.forEach(expense => {
-                const weekKey = getWeekKey(new Date(expense.date));
-                weeklyData[weekKey] = (weeklyData[weekKey] || 0) + expense.amount;
-            });
-
-            const weeks = Object.keys(weeklyData).sort();
-            let trendDirection = 'stabil';
-
-            if (weeks.length >= 2) {
-                const firstWeek = weeklyData[weeks[0]] || 0;
-                const lastWeek = weeklyData[weeks[weeks.length - 1]] || 0;
-
-                if (lastWeek > firstWeek * 1.1) {
-                    trendDirection = 'meningkat';
-                } else if (lastWeek < firstWeek * 0.9) {
-                    trendDirection = 'menurun';
-                }
-            }
-
-            const avgWeeklyExpense = Object.values(weeklyData).reduce((sum, val) => sum + val, 0) / Math.max(weeks.length, 1);
-
-            document.getElementById('monthlyTrend').innerHTML = `
-                <div style="padding: 15px; background: #353545; border-radius: 8px; margin-bottom: 15px;">
-                    <h5>📊 Analisis Tren 30 Hari:</h5>
-                    <p><strong>Tren Pengeluaran:</strong> ${getTrendIcon(trendDirection)} ${trendDirection}</p>
-                    <p><strong>Rata-rata Mingguan:</strong> ${formatCurrency(avgWeeklyExpense)}</p>
-                    <p><strong>Total Minggu Dianalisis:</strong> ${weeks.length}</p>
-                </div>
-
-                <div style="padding: 15px; background: #353545; border-radius: 8px;">
-                    <h5>💡 Insight Tren:</h5>
-                    ${getTrendInsight(trendDirection, recentExpenses.length, recentIncome.length)}
+            document.getElementById('financialStatus').innerHTML = `
+                <div style="color: ${statusColor};">
+                    <p><strong>${status}</strong></p>
+                    <p>${getStatusDescription(savingsRate)}</p>
                 </div>
             `;
+
+            // Update stats
+            const avgTransaction = expenses.length > 0 ? totalExpense / expenses.length : 0;
+            const highestExpense = expenses.length > 0 ? Math.max(...expenses.map(e => e.amount)) : 0;
+            const categoriesUsed = Object.keys(categoryTotals).length;
+
+            document.getElementById('avgTransaction').textContent = formatCurrency(avgTransaction);
+            document.getElementById('highestExpense').textContent = formatCurrency(highestExpense);
+            document.getElementById('totalCategories').textContent = categoriesUsed;
+            document.getElementById('daysTracked').textContent = daysTracked;
         }
 
-        function getWeekKey(date) {
-            const year = date.getFullYear();
-            const week = Math.ceil((date - new Date(year, 0, 1)) / (7 * 24 * 60 * 60 * 1000));
-            return `${year}-W${week}`;
+        function getStatusDescription(rate) {
+            if (rate >= 20) return 'Excellent!';
+            if (rate >= 10) return 'Good job!';
+            if (rate >= 0) return 'Bisa lebih baik';
+            return 'Hati-hati!';
         }
 
-        function getTrendIcon(direction) {
-            const icons = {
-                'meningkat': '📈',
-                'menurun': '📉',
-                'stabil': '➡️'
-            };
-            return icons[direction];
-        }
-
-        function getTrendInsight(direction, expenseCount, incomeCount) {
-            let insight = '';
-
-            switch(direction) {
-                case 'meningkat':
-                    insight = '<p>⚠️ Pengeluaran Anda cenderung meningkat. Pertimbangkan untuk meninjau anggaran dan mengurangi pengeluaran tidak penting.</p>';
-                    break;
-                case 'menurun':
-                    insight = '<p>✅ Bagus! Pengeluaran Anda menunjukkan tren menurun. Pertahankan kebiasaan berhemat ini.</p>';
-                    break;
-                default:
-                    insight = '<p>📊 Pengeluaran Anda relatif stabil. Ini menunjukkan konsistensi dalam pengelolaan keuangan.</p>';
-            }
-
-            if (expenseCount > incomeCount * 3) {
-                insight += '<p>💡 Anda memiliki banyak transaksi pengeluaran. Pertimbangkan untuk menggabungkan pembelian agar lebih efisien.</p>';
-            }
-
-            return insight;
-        }
-
-        function showTab(tabName) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            // Show selected tab content
-            document.getElementById(tabName).classList.add('active');
-
-            // Add active class to clicked tab
-            event.target.classList.add('active');
-        }
-
-        function openWhatsappModal() {
-            document.getElementById('whatsappModal').style.display = 'block';
-            document.getElementById('modalWhatsapp').value = settings.whatsappNumber || '';
-        }
-
-        function closeWhatsappModal() {
-            document.getElementById('whatsappModal').style.display = 'none';
-        }
-
-        function saveWhatsappNumber() {
-            const whatsappNumber = document.getElementById('modalWhatsapp').value.trim();
-
-            if (!whatsappNumber) {
-                alert('Mohon masukkan nomor WhatsApp!');
+        function confirmDeleteAll() {
+            if (transactions.length === 0) {
+                showNotification('Tidak ada data untuk dihapus!', 'error');
                 return;
             }
 
-            // Basic validation
-            if (!/^\d{10,15}$/.test(whatsappNumber)) {
-                alert('Format nomor tidak valid! Gunakan format: 6281234567890');
-                return;
+            if (confirm('Apakah Anda yakin ingin menghapus SEMUA data? Tindakan ini tidak dapat dibatalkan!')) {
+                deleteAllData();
             }
+        }
 
-            settings.whatsappNumber = whatsappNumber;
-            document.getElementById('userWhatsapp').value = whatsappNumber;
+        function deleteAllData() {
+            transactions = [];
             saveData();
-            closeWhatsappModal();
-            showNotification('Nomor WhatsApp berhasil disimpan!', 'success');
+            updateSummary();
+            displayTransactions();
+            generateResearchData();
+
+            // Clear calculator result
+            document.getElementById('savingsResult').style.display = 'none';
+
+            showNotification('Semua data berhasil dihapus!', 'success');
         }
 
-        function sendReport() {
-            const whatsappNumber = settings.whatsappNumber || document.getElementById('userWhatsapp').value.trim();
-
-            if (!whatsappNumber) {
-                alert('Mohon atur nomor WhatsApp terlebih dahulu!');
-                openWhatsappModal();
-                return;
-            }
-
-            // Generate comprehensive report
-            const totalIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
-            const totalExpense = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
-            const balance = totalIncome - totalExpense;
-            const savingsRate = totalIncome > 0 ? ((totalIncome - totalExpense) / totalIncome * 100).toFixed(1) : 0;
-
-            // Category breakdown
-            const expenses = transactions.filter(t => t.type === 'expense');
-            const categoryTotals = {};
-            expenses.forEach(expense => {
-                categoryTotals[expense.category] = (categoryTotals[expense.category] || 0) + expense.amount;
-            });
-
-            const topCategories = Object.entries(categoryTotals)
-                .sort(([,a], [,b]) => b - a)
-                .slice(0, 3)
-                .map(([category, amount]) => `${getCategoryIcon(category)} ${category}: ${formatCurrencySimple(amount)}`)
-                .join('\n');
-
-            const report = `
-*LAPORAN KEUANGAN MONEYKU*
-Tanggal: ${new Date().toLocaleDateString('id-ID')}
-
-*RINGKASAN KEUANGAN:*
-• Total Pemasukan: ${formatCurrencySimple(totalIncome)}
-• Total Pengeluaran: ${formatCurrencySimple(totalExpense)}
-• Saldo: ${formatCurrencySimple(balance)}
-• Tingkat Tabungan: ${savingsRate}%
-
-*TOP 3 KATEGORI PENGELUARAN:*
-${topCategories || 'Belum ada data'}
-
-*STATUS:* ${savingsRate >= 20 ? 'Sangat Sehat! 🎉' : savingsRate >= 10 ? 'Sehat 👍' : 'Perlu Perbaikan ⚠️'}
-
-*SARAN:* ${getSuggestionText(savingsRate, categoryTotals, totalExpense)}
-
----
-Dikirim otomatis dari Management Of Money
-            `.trim();
-
-            const encodedReport = encodeURIComponent(report);
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedReport}`;
-
-            window.open(whatsappUrl, '_blank');
-            showNotification('Laporan berhasil dikirim ke WhatsApp!', 'success');
+        function clearIncomeForm() {
+            document.getElementById('incomeDesc').value = '';
+            document.getElementById('incomeAmount').value = '';
+            setTodayDate();
         }
 
-        function getSuggestionText(savingsRate, categoryTotals, totalExpense) {
-            if (savingsRate < 10) {
-                return 'Tingkatkan tabungan dengan mengurangi pengeluaran tidak penting.';
-            } else if (categoryTotals['makanan'] && categoryTotals['makanan'] / totalExpense > 0.4) {
-                return 'Pengeluaran makanan tinggi, coba masak di rumah lebih sering.';
-            } else if (categoryTotals['hiburan'] && categoryTotals['hiburan'] / totalExpense > 0.2) {
-                return 'Kurangi pengeluaran hiburan untuk meningkatkan tabungan.';
-            } else {
-                return 'Pertahankan kebiasaan menabung yang baik!';
-            }
+        function clearExpenseForm() {
+            document.getElementById('expenseDesc').value = '';
+            document.getElementById('expenseAmount').value = '';
+            setTodayDate();
         }
 
-        function formatCurrencySimple(amount) {
+        function formatCurrency(amount) {
             return `Rp ${amount.toLocaleString('id-ID')}`;
         }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('id-ID');
+        }
+
+        function showNotification(message, type) {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notif => notif.remove());
+
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            // Show notification
+            setTimeout(() => notification.classList.add('show'), 100);
+
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
